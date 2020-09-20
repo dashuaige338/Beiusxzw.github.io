@@ -1,0 +1,232 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width initial-scale=1'>
+    <title>Plotly</title>
+
+
+    <script src="../static/js/jquery3.4.1.min.js"></script>
+    <script src="../static/js/min.js"></script>
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/js/highlight.pack.js"></script>
+
+    <link href="../static/css/base.css" rel="stylesheet">
+    <link href="../static/css/styles/atelier-sulphurpool-light.css" rel="stylesheet">
+    <link href="../static/css/min.css" rel="stylesheet">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css">
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+    <style>
+        iframe {
+            margin-top: 3rem;
+            width: 100%;
+            height: 20rem;
+            border-width: 0rem;
+        }
+    </style>
+</head>
+
+<body id="page-top" style="overflow-x: hidden;">
+    <header>
+        <div>
+            <nav class="navbar fixed-top navbar-expand-md  scrolling-navbar">
+
+                <div class="navbar-nav ml-auto" style="margin-right: 10rem;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-weight: 800;font-size: large;">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="animated--grow-in" style="margin-right: 2rem;">
+                            <a class="nav-link animated--grow-in" href="./index.html#About"><span><strong>About</strong></span></a>
+                        </div>
+                        <div class="animated--grow-in" style="margin-right: 2rem;">
+                            <a class="nav-link animated--grow-in " href="./index.html#Portfolio"><span><strong>Portfolio</strong></span></a>
+                        </div>
+                        <div class="animated--grow-in" style="margin-right: 2rem;">
+                            <a class="nav-link animated--grow-in " href="./blogs.html"><span><strong>Blogs</strong></span></a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="wrapper">
+        <div class="card" style="padding:10%;">
+
+            <body>
+                <h1>Plotly in Python</h1>
+                <p><a href='https://plot.ly/python'>plotly.py</a> is an interactive, open-source, and browser-based graphing library for Python</p>
+                <h2>Installation</h2>
+                <p>plotly.py may be installed using pip...</p>
+                <pre><code class='language-shell' lang='shell'>pip install plotly==4.9.0
+</code></pre>
+                <p>or conda.</p>
+                <pre><code class='language-shell' lang='shell'>conda install -c plotly plotly=4.9.0
+</code></pre>
+                <h2>Basics</h2>
+                <pre><code class='language-python' lang='python'>import plotly.graph_objects as go # or from plotly.graph_objects import *
+from sklearn.datasets import load_iris
+import pandas as pd
+
+df = pd.DataFrame(load_iris().data,columns=[&#39;A&#39;,&#39;B&#39;,&#39;C&#39;,&#39;D&#39;])
+</code></pre>
+                <pre><code class='language-python' lang='python'>fig1 = Figure(data = Scatter(x=df.A,y=df.B,mode=&quot;markers&quot;,
+                             marker=dict(symbol=&#39;circle-dot&#39;,
+                                       size=[10]*len(df), color=None),
+                                       ))
+fig1.show()
+</code></pre>
+                <pre><code class='language-python' lang='python'>fig2 = Figure()
+fig2.add_trace(data = Bar(x=df.A,y=df.B))
+</code></pre>
+                <div class="row" style="text-align:center;">
+                    <div class="col"><iframe src="../static/imgs/figure1.html"></iframe>
+                        <b>fig1</b>
+                    </div>
+                    <div class="col"><iframe src="../static/imgs/figure2.html"></iframe>
+                        <b>fig2</b>
+                    </div>
+                </div>
+                <br>
+                <p>There are also other graphs types in the plotly graphing library including Pie charts, Bubble charts, Heatmaps, 3D charts, etc. A more concrete tutorial are available in <a href='https://plotly.com/python/' target='_blank' class='url'>https://plotly.com/python/</a>.
+                    We will now move to Dash, a powerful tool to incorporate the figure to webpages.</p>
+                <h2>Dash</h2>
+                <pre><code class='language-python' lang='python'>import dash
+import dash_core_components as dcc
+import dash_html_components as html
+from dash.dependencies import Input, Output
+</code></pre>
+                <p>&nbsp;</p>
+                <p>It is easy to wrap the <code>go.Figure</code> object to dash as follows:</p>
+                <p>First, we create an dash app that run on a flask server:</p>
+                <pre><code class='language-python' lang='python'>external_stylesheets = [&#39;https://codepen.io/chriddyp/pen/bWLwgP.css&#39;]
+app = dash.Dash(__name__, server=True, external_stylesheets=external_stylesheets)
+</code></pre>
+                <p>Second, we add our figure and some html description to the app layout:</p>
+                <pre><code class='language-python' lang='python'>app.layout = html.Div([
+html.Div([html.H1(&quot;My First Graph&quot;)],style={&quot;text-align&quot;: &quot;center&quot;}),
+html.Div([dcc.Graph(id=&#39;Graph&#39;, figure=fig1, style={&quot;height&quot;: &quot;60rem&quot;})])])
+app.run_server()
+</code></pre>
+                <p>The result will like:</p>
+                <pre><code class='language-python' lang='python'>In [12]: app.run_server()
+Dash is running on http://127.0.0.1:8050/
+
+ Warning: This is a development server. Do not use app.run_server
+ in production, use a production WSGI server like gunicorn instead.
+
+ * Serving Flask app &quot;__main__&quot; (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://127.0.0.1:8050/ (Press CTRL+C to quit)
+</code></pre>
+                <h2>Callbacks</h2>
+                <h3>Basic Callbacks</h3>
+                <p>we can increase interactivity by adding Callbacks to our dash app.</p>
+                <p><code>Output(component_id:str, component_property:str)</code></p>
+                <p><code>[Intput(component_id:str, component_property:str])</code></p>
+                <p>In the following example, we will use the click data to generate a new figure with increased size of clicked point.</p>
+                <pre><code class='language-python' lang='python'>import copy
+fig1.update_layout(clickmode=&#39;event+select&#39;, transition_duration=500)
+def generate_clicked_figure(data, figure):
+    &quot;&quot;&quot;
+        generate new figure with difference in color and size 
+
+        @param  data                click data
+        @param  figure              the original figure
+
+        @return the new figure
+    &quot;&quot;&quot;
+    out = copy.deepcopy(fig1)
+    index = data[&#39;points&#39;][0][&#39;pointIndex&#39;]
+    print(index)
+    s = list(out[&#39;data&#39;][0].marker.size)
+    for i in range(len(s)):
+        if i == index:
+            s[i] = s[i] + 100
+    out[&#39;data&#39;][0].marker.size = tuple(s)
+    print(&quot;returning new figure&quot;)
+    return out
+      
+@app.callback(Output(&#39;Graph&#39;, &#39;figure&#39;), [Input(&#39;Graph&#39;, &#39;clickData&#39;)])
+def callback(clickData):
+	if clickData != None:
+		return generate_clicked_figure(clickData, fig1)
+</code></pre>
+                <h3>Advanced callbacks</h3>
+                <p>&nbsp;</p>
+                <h2>Incorporate with existing Flask server</h2>
+                <p>We can use <code>DispatcherMiddleware</code> to bind dash app and flask together on server.</p>
+                <pre><code class='language-python' lang='python'>import flask
+from flask_caching import Cache
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+import os
+
+flaskApp = Flask(__name__)
+flaskApp.secret_key = os.urandom(24)
+
+
+app = dash.Dash(__name__, server=flaskApp, external_stylesheets=external_stylesheets,
+                serve_locally=False, routes_pathname_prefix=&#39;/mygraph/&#39;, 
+                requests_pathname_prefix=&#39;/mygraph/&#39;)
+
+@flaskApp.route(&#39;/mygraph&#39;)
+def index():
+    return render_template(&quot;index.html&quot;)
+  
+application = DispatcherMiddleware(flaskApp, {&#39;/mygraph&#39;: app})
+
+app.run_server(host=&quot;127.0.0.1&quot;, port=5050)
+</code></pre>
+                <p>Then in 127.0.0.1:5050 we can see the index page, and in 127.0.0.1:5050/mygraph we can see the dash graph.</p>
+                <br>
+                <br>
+        </div>
+    </div>
+    <br>
+    <div class="footer-bg ">
+        <div class="footer text-center text-white " style="margin-right:10%;">
+            <!--First column-->
+
+
+            <!--Social buttons-->
+
+            <br>
+            <div class="footer">
+
+                <br>
+                <br>
+
+                <strong class="text-white "> 
+
+						Personal e-mail: <a href="mailto:xueziweisz@gmail.com " class="link-in-text-white ">  xueziweisz@gmail.com</a><br>
+						Instute e-mail: <a href="mailto:ziwei.17@intl.zju.edu.cn " class="link-in-text-white ">  ziwei.17@intl.zju.edu.cn</a>
+
+					</strong>
+                <br>
+                <br>
+                <div class=" list-unstyled list-inline ">
+
+                    <li class="list-inline-item "><a class="btn-floating btn-tw" href="https://twitter.com/xueziweisz "><i class="fab fa-twitter text-white "> </i></a></li>
+                    <li class="list-inline-item "><a class="btn-floating btn-gplus" href="mailto:xueziweisz@gmail.com "><i class="fab fa-google-plus-g text-white "> </i></a></li>
+                    <li class="list-inline-item "><a class="btn-floating btn-git" href="https://github.com/Beiusxzw "><i class="fab fa-github text-white "> </i></a></li>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="footer-copyright ">
+                Copyright © 2020 Snow | <img src="../static/imgs/icn.png"> 粤ICP备20073081号
+            </div>
+            <br>
+            <br>
+            <br>
+        </div>
+
+    </div>
+    </body>
+
+</html>

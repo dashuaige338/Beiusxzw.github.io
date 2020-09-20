@@ -1,0 +1,318 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width initial-scale=1'>
+    <title>Awk</title>
+
+
+    <script src="../static/js/jquery3.4.1.min.js"></script>
+    <script src="../static/js/min.js"></script>
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/js/highlight.pack.js"></script>
+
+    <link href="../static/css/base.css" rel="stylesheet">
+    <link href="../static/css/styles/atelier-dune-light.css" rel="stylesheet">
+    <link href="../static/css/min.css" rel="stylesheet">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css">
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+</head>
+
+<body id="page-top" style="overflow-x: hidden;">
+    <header>
+        <div>
+            <nav class="navbar fixed-top navbar-expand-md  scrolling-navbar">
+
+                <div class="navbar-nav ml-auto" style="margin-right: 10rem;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-weight: 800;font-size: large;">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="animated--grow-in" style="margin-right: 2rem;">
+                            <a class="nav-link animated--grow-in" href="./index.html#About"><span><strong>About</strong></span></a>
+                        </div>
+                        <div class="animated--grow-in" style="margin-right: 2rem;">
+                            <a class="nav-link animated--grow-in " href="./index.html#Portfolio"><span><strong>Portfolio</strong></span></a>
+                        </div>
+                        <div class="animated--grow-in" style="margin-right: 2rem;">
+                            <a class="nav-link animated--grow-in " href="./blogs.html"><span><strong>Blogs</strong></span></a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="wrapper">
+        <div class="card" style="padding:10%;">
+            <h1>Metaprogramming in Python</h1>
+            <p><strong>Reference: David Beazly &amp; Brian K. Jones (2013) Python cookbook Chater 9 Metaprogramming</strong></p>
+            <p> testing python version: 3.7.2 </p>
+            <h2>Decorators on Functions</h2>
+            <h3>First Level Decorators</h3>
+            <p><code>wraps</code> is a convenience function for invoking <a href='https://docs.python.org/2/library/functools.html#functools.update_wrapper'><code>update_wrapper()</code></a> as a function decorator when defining a wrapper function. It is
+                equivalent to <code>partial(update_wrapper, wrapped=wrapped, assigned=assigned, updated=updated)</code>. </p>
+            <pre><code class='language-python' lang='python'>from functools import wraps
+
+def decorator(func):
+  &#39;&#39;&#39;
+  Initialization
+  &#39;&#39;&#39;
+  @wraps(func)
+	def wrapper(*args, **kwargs):
+    &#39;&#39;&#39;
+    Code run with the function call
+    &#39;&#39;&#39;
+    return func(*args, **kwargs)
+  return wrapper
+
+@decorator
+def func(...)
+</code></pre>
+            <h3>Second Level Decorators</h3>
+            <p>Putting the wrapper inside another function to handle the wrapped function:</p>
+            <pre><code class='language-python' lang='python'>def decorator(*ty_args, **ty_kwargs):
+  def decorates(func):
+    &#39;&#39;&#39;
+    Managing Function Information
+    &#39;&#39;&#39;
+		sig = signature(func)
+		bound_types = sig.bind_partial(*ty_args, **ty_kwargs).arguments
+
+		@wraps(func)
+		def wrapper(*args, **kwargs):
+    	&#39;&#39;&#39;
+			Handling Argument information
+			&#39;&#39;&#39;
+      bound_values = sig.bind(*args, **kwargs)
+      for name, value in bound_values.arguments.items():
+      if name in bound_types:
+      if not isinstance(value, bound_types[name]):
+      raise TypeError(
+      &#39;Argument {} must be {}&#39;.format(name, bound_types[name]) )
+      
+    return func(*args, **kwargs) 
+  return wrapper
+return decorate
+</code></pre>
+            <h2>Decorators on Classes</h2>
+            <p>define a function taking <code>cls</code> as parameter can work as class decorator.</p>
+            <pre><code class='language-python' lang='python'>def decorator(cls):
+  orig = cls.__getattribute__
+  def __newgetattribute__(self, name):
+    print(&quot;getting name: &quot; + name)
+    return orig(self, name)
+  cls.__getattribute__ = __newgetattribute__
+  return cls
+</code></pre>
+            <h3>Decorators on classes that takes arguments</h3>
+            <p>Similiarly to function wrapers, class decorators can be embedded inside another function that takes arguments. In the following example, a decorator takes types as argument to enforce specific type of class attributes.</p>
+            <pre><code class='language-python' lang='python'>def decorator(*types):
+   def decorates(cls):
+       cls.typedct={}
+       set_orig = cls.__setattr__
+       get_orig = cls.__getattribute__
+       def __newsetattribute__(self,name,value):
+           if not cls.typedct.get(name):
+               if type(value) not in types:
+                   raise TypeError(&quot;&quot;)
+               cls.typedct[name] = type(value)
+               set_orig(self,name,value)
+           else:
+               if cls.typedct[name] != type(value):
+                   raise TypeError(&quot;expected type {};\n found {}&quot;.format(cls.typedct[name],type(value)))
+               else:
+                   set_orig(self,name,value)
+       def __newgetattribute__(self, name):
+           return get_orig(self,name)
+       cls.__getattribute__ = __newgetattribute__
+       cls.__setattr__ = __newsetattribute__
+       return cls
+   return decorates
+</code></pre>
+            <h2>Metaclass</h2>
+            <p>Classes are callable. These objects normally act as factories for new instances of themselves, but variations are possible for class types that override <a href='https://docs.python.org/3/reference/datamodel.html#object.__new__'><code>__new__()</code></a>.
+                The arguments of the call are passed to <a href='https://docs.python.org/3/reference/datamodel.html#object.__new__'><code>__new__()</code></a> and, in the typical case, to <a href='https://docs.python.org/3/reference/datamodel.html#object.__init__'><code>__init__()</code></a>                to initialize the new instance.</p>
+            <p>If the metaclass has a <code>__prepare__</code> attribute, it is called as <code>namespace = metaclass.__prepare__(name, bases, **kwds)</code> (where the additional keyword arguments, if any, come from the class definition). The <code>__prepare__</code>                method should be implemented as a <a href='https://docs.python.org/3/library/functions.html#classmethod'><code>classmethod()</code></a>. The namespace returned by <code>__prepare__</code> is passed in to <code>__new__</code>, but when
+                the final class object is created the namespace is copied into a new <code>dict</code>.</p>
+            <p> <a href='https://docs.python.org/3/reference/datamodel.html#object.__new__'><code>__new__()</code></a> is a static method (special-cased so you need not declare it as such) that takes the class of which an instance was requested as its first
+                argument. The remaining arguments are those passed to the object constructor expression (the call to the class). The return value of <a href='https://docs.python.org/3/reference/datamodel.html#object.__new__'><code>__new__()</code></a>                should be the new object instance (usually an instance of <em>cls</em>).</p>
+            <p><code>__get__()</code>is called to get the attribute of the owner class (class attribute access) or of an instance of that class (instance attribute access).</p>
+            <pre><code class='language-python' lang='python'>class metaclass(type):
+  def __get__(self, instance, cls):
+    return self
+  
+  def __call__(self, *args):
+    # call methods based on args
+    pass
+  
+  def __new__(cls, clsname, bases, clsdict):
+    # controling class dict initialization
+    d = dict(clsdict)
+    return type.__new__(cls, clsname, bases, d)
+  
+  @classmethod
+  def __prepare__(cls, clsname, bases):
+    return OrderedDict()
+</code></pre>
+            <h3>Instance Creation</h3>
+            <h4>Cached instance</h4>
+            <p>Some time we want to create instance that will be soon used again, and then we can make the class to be cacheable:</p>
+            <pre><code class='language-python' lang='python'>class Cached(type):
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs) 
+		self.__cache = weakref.WeakValueDictionary()
+    
+	def __call__(self, *args): 
+		if args in self.__cache:
+			return self.__cache[args] 
+		else:
+			obj = super().__call__(*args) 
+			self.__cache[args] = obj 
+			return obj
+</code></pre>
+            <h4>Singleton</h4>
+            <p>Also, the following code defines a singleton:</p>
+            <pre><code class='language-python' lang='python'>class Singleton(type):
+  def __init__(self, *args, **kwargs):
+    self.__instance = None
+    super().__init__(*args, **kwargs)
+    
+  def __call__(self, *args, **kwargs): 
+    if not self.__instance:
+      self.__instance = super().__call__(*args, **kwargs)
+      return self.__instance
+    else:
+      return self.__instance
+</code></pre>
+            <h3>Multimethod class</h3>
+            <p>In many other languages, class provies methods with the same name by with different argument counts or types. We want to create a class that serve this function:</p>
+            <p>First, we define a class called <code>Multimethod</code>. We can call <code>register()</code> to register a method to the class according to its argument types using <code>inspect</code> module. The <code>Multimethod</code> class is also callable
+                achieved by <code>__call__(self,*args)</code>. </p>
+            <p>Then, we define the class <code>Multidict</code>. In the <code>__setitem__()</code> method, if there the value of the key is an instance of <code>multimethod</code> , we register the method. Else, we create a instance of multimethod and we
+                create a register the existing and the new method. </p>
+            <p>In the final class <code>Multimeta</code>, we return the <code>Multidict</code> in the <code>__prepare__</code> function.</p>
+            <pre><code class='language-python' lang='python'>import inspect
+
+class Multimethod(type):
+  def __init__(self, name):
+  	register_dict = {}
+    self.__name__ = name
+    
+  def _register(self,key,value):
+  	# key for argument type; value for method
+    if not register_dict[key]:
+      register_dict[key] = value
+  
+  def register(method):
+    sig = inspect.signature(method)
+    types = []
+    for name, parm in sig.parameters.items():
+  	 	if name == &#39;self&#39;:
+      	continue
+      if parm.annotation is inspect.Parameter.empty:
+      	raise TypeError(
+        &#39;Argument {} must be annotated with a type&#39;.format(name)
+        )
+      if not isinstance(parm.annotation, type):
+        raise TypeError(
+        &#39;Argument {} annotation must be a type&#39;.format(name)
+        )
+      if parm.default is not inspect.Parameter.empty:
+				self._register(tuple(types),method)
+      types.append(parm.annotation)
+    self._register(tuple(types),method)
+  
+  def __call__(self, *args):
+    types = tuple(type(arg) for arg in args[1:])
+    meth = self.register_dict.get(types)
+    if meth:
+      meth(*args)
+    else:
+        raise TypeError(
+        &#39;...&#39;.format(name)
+        )
+  
+  
+  def __new__(cls, clsname, bases, clsdict):
+    # controling class dict initialization
+    d = dict(clsdict)
+    return type.__new__(cls, clsname, bases, d)
+  
+  def __get__(self, instance, cls):
+    # Descriptor method needed to make calls work in a class
+    if instance is not None:
+    	return types.MethodType(self, instance) 
+  	else:
+    	return self
+    
+class MultiDict(dict):
+	def __setitem__(self, key, value):
+		if key in self:
+			current_value = self[key]
+			if isinstance(current_value, MultiMethod):
+				current_value.register(value)
+			else:
+				mvalue = MultiMethod(key)
+				mvalue.register(current_value)
+				mvalue.register(value)
+				super().__setitem__(key, mvalue)
+		else:
+			super().__setitem__(key, value)
+
+class MultiMeta(type):
+	def __new__(cls,clsname,bases,clsdict):
+		return type.__new__(cls,clsname,bases,dict(clsdict))
+		
+	@classmethod
+	def __prepare__(cls,clsname,bases):
+		return MultiDict()
+</code></pre>
+            <p>In summary, using <code>__prepare__()</code>, <code>__call__()</code>, <code>__new__()</code> and other methods in metaprogramming, we can modify our class to achieve many purpose.</p>
+            <p>&nbsp;</p>
+        </div>
+    </div>
+    <br>
+    <div class="footer-bg ">
+        <div class="footer text-center text-white " style="margin-right:10%;">
+            <!--First column-->
+
+
+            <!--Social buttons-->
+
+            <br>
+            <div class="footer">
+
+                <br>
+                <br>
+
+                <strong class="text-white "> 
+
+						Personal e-mail: <a href="mailto:xueziweisz@gmail.com " class="link-in-text-white ">  xueziweisz@gmail.com</a><br>
+						Instute e-mail: <a href="mailto:ziwei.17@intl.zju.edu.cn " class="link-in-text-white ">  ziwei.17@intl.zju.edu.cn</a>
+
+					</strong>
+                <br>
+                <br>
+                <div class=" list-unstyled list-inline ">
+
+                    <li class="list-inline-item "><a class="btn-floating btn-tw" href="https://twitter.com/xueziweisz "><i class="fab fa-twitter text-white "> </i></a></li>
+                    <li class="list-inline-item "><a class="btn-floating btn-gplus" href="mailto:xueziweisz@gmail.com "><i class="fab fa-google-plus-g text-white "> </i></a></li>
+                    <li class="list-inline-item "><a class="btn-floating btn-git" href="https://github.com/Beiusxzw "><i class="fab fa-github text-white "> </i></a></li>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="footer-copyright ">
+                Copyright © 2020 Snow | <img src="../static/imgs/icn.png"> 粤ICP备20073081号
+            </div>
+            <br>
+            <br>
+            <br>
+        </div>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width initial-scale=1'>
+    <title>Awk</title>
+
+
+    <script src="./static/js/jquery3.4.1.min.js"></script>
+    <script src="./static/js/min.js"></script>
+    <script src="./static/js/bootstrap.bundle.min.js"></script>
+    <script src="./static/js/highlight.pack.js"></script>
+
+    <link href="./static/css/base.css" rel="stylesheet">
+    <link href="./static/css/styles/atelier-dune-light.css" rel="stylesheet">
+    <link href="./static/css/min.css" rel="stylesheet">
+    <link href="./static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./static/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css">
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+</head>
+
+<body id="page-top" style="overflow-x: hidden;">
+    <header>
+        <div>
+            <nav class="navbar fixed-top navbar-expand-md  scrolling-navbar">
+
+                <div class="navbar-nav ml-auto" style="margin-right: 10rem;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-weight: 800;font-size: large;">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="animated--grow-in" style="margin-right: 2rem;">
+                            <a class="nav-link animated--grow-in" href="./index.html#About"><span><strong>About</strong></span></a>
+                        </div>
+                        <div class="animated--grow-in" style="margin-right: 2rem;">
+                            <a class="nav-link animated--grow-in " href="./index.html#Portfolio"><span><strong>Portfolio</strong></span></a>
+                        </div>
+                        <div class="animated--grow-in" style="margin-right: 2rem;">
+                            <a class="nav-link animated--grow-in " href="./blogs.html"><span><strong>Blogs</strong></span></a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="wrapper">
+        <div class="card" style="padding:10%;">
+
+            <body>
+                <h1><code>Awk</code> Note</h1>
+                <p> Awk is a domain-specific language designed for text processing and typically used as a data extraction and reporting tool. It is a standard feature of most Unix-like operating systems. -- Wikipedia
+                </p>
+                <p>Awk assign some variables for each data fields:</p>
+                <ul>
+                    <li>$0 for the whole line.</li>
+                    <li>$1 for the first field.</li>
+                    <li>$2 for the second field.</li>
+                    <li>$n for the nth field.</li>
+
+                </ul>
+                <p><strong>Example:</strong> <code>awk {print $1} file</code></p>
+                <p>Sometimes the separator in some files is not space nor tab but something else. You can specify it using –F option:</p>
+                <p><strong>Example:</strong> <code>awk -F: {print $1} file</code></p>
+                <p>Type awk script in a file and specify that file using the -f option.</p>
+                <p><strong>Example:</strong> <code>awk -F: -f script file</code></p>
+                <p>Script is like</p>
+                <pre><code class='language-awk' lang='awk'>{
+ 
+text = $1 &quot; home at &quot; $6
+ 
+print text  
+ 
+}
+</code></pre>
+                <p>Use the <code>BEGIN</code> keyword to run before processing the data;</p>
+                <p>Use the <code>END</code> keyword to run after processing the data</p>
+                <pre><code class='language-awk' lang='awk'>awk &#39;BEGIN {print &quot;The File Contents:&quot;}
+
+{print $0} END {print &quot;Finished&quot;}&quot;&#39; myfile
+</code></pre>
+                <p><strong>FIELDWIDTHS</strong> Specifies the field width.</p>
+                <p><strong>RS</strong> Specifies the record separator.</p>
+                <p><strong>FS</strong> Specifies the field separator.</p>
+                <p><strong>OFS</strong> Specifies the Output separator.</p>
+                <p><strong>ORS</strong> Specifies the Output separator.</p>
+                <p>Suppose that your data are distributed on different lines like the following:</p>
+                <pre><code>Person Name
+123 High Street
+(222) 466-1234
+
+Another person
+487 High Street
+(523) 643-8754
+</code></pre>
+                <p>You need to set the FS to the newline (\n) and the RS to a blank text, so empty lines will be considered separators.</p>
+                <pre><code class='language-awk' lang='awk'>$ awk &#39;BEGIN{FS=&quot;\n&quot;; RS=&quot;&quot;} {print $1,$3}&#39; addresses
+</code></pre>
+                <p><strong>ARGC</strong> Retrieves the number of passed parameters.</p>
+                <p><strong>ARGV</strong> Retrieves the command line parameters.</p>
+                <p><strong>ENVIRON</strong> Array of the shell <a href='https://likegeeks.com/linux-environment-variables/'>environment variables</a> and corresponding values.</p>
+                <p><strong>FILENAME</strong> The file name that is processed by awk.</p>
+                <p><strong>NF</strong> Fields count of the line being processed.</p>
+                <p><strong>NR</strong> Retrieves total count of processed records.</p>
+                <p><strong>FNR</strong> The record which is processed.</p>
+                <p> <strong>Example:</strong> ​ <code>awk &#39;BEGIN{FS=&quot;,&quot;}{print $1,&quot;NF=&quot;NF,&quot;FNR=&quot;FNR,&quot;NR=&quot;NR}&#39; testFile testFile</code></p>
+                <p> </p>
+                <p><strong>IGNORECASE</strong> To ignore the character case.</p>
+                <p><strong>Formatted Printing</strong></p>
+                <p>c Prints numeric output as a string.</p>
+                <p>d Prints an integer value.</p>
+                <p>e Prints scientific numbers.</p>
+                <p>f Prints float values.</p>
+                <p>o Prints an octal value.</p>
+                <p>s Prints a text string.</p>
+                <p><strong>Example:</strong></p>
+                <pre><code>$ awk &#39;BEGIN{
+
+x = 100 * 100
+
+printf &quot;The result is: %e\n&quot;, x
+
+}&#39;
+</code></pre>
+                <p><strong>Mathematical functions</strong></p>
+                <p><strong>sin(x) | cos(x) | sqrt(x) |</strong> <strong>exp(x) |</strong> <strong>log(x) |</strong> <strong>rand()</strong></p>
+                <p>&nbsp;</p>
+                <pre><code>awk '{print "string to add" $0}' fileName
+awk '{print $0 "string to add"}' fileName
+awk '$0=$0 X"' fileName
+1）delete the first column：awk '{$1="";print $0}' fileName or sed -e 's/[^ ]* //' text              
+2）delete the designated column：awk '{$Num="";print $0}' fileName</code></pre>
+        </div>
+    </div>
+    <br>
+    <div class="footer-bg ">
+        <div class="footer text-center text-white " style="margin-right:10%;">
+            <!--First column-->
+
+
+            <!--Social buttons-->
+
+            <br>
+            <div class="footer">
+
+                <br>
+                <br>
+
+                <strong class="text-white "> 
+
+						Personal e-mail: <a href="mailto:xueziweisz@gmail.com " class="link-in-text-white ">  xueziweisz@gmail.com</a><br>
+						Instute e-mail: <a href="mailto:ziwei.17@intl.zju.edu.cn " class="link-in-text-white ">  ziwei.17@intl.zju.edu.cn</a>
+
+					</strong>
+                <br>
+                <br>
+                <div class=" list-unstyled list-inline ">
+
+                    <li class="list-inline-item "><a class="btn-floating btn-tw" href="https://twitter.com/xueziweisz "><i class="fab fa-twitter text-white "> </i></a></li>
+                    <li class="list-inline-item "><a class="btn-floating btn-gplus" href="mailto:xueziweisz@gmail.com "><i class="fab fa-google-plus-g text-white "> </i></a></li>
+                    <li class="list-inline-item "><a class="btn-floating btn-git" href="https://github.com/Beiusxzw "><i class="fab fa-github text-white "> </i></a></li>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="footer-copyright ">
+                Copyright © 2020 Snow | <img src="./static/imgs/icn.png"> 粤ICP备20073081号
+            </div>
+            <br>
+            <br>
+            <br>
+        </div>
+
+    </div>
+    </body>
+
+</html>

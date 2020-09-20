@@ -1,0 +1,1001 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width initial-scale=1'>
+    <title>Scala notebook</title>
+
+
+    <script src="../static/js/jquery3.4.1.min.js"></script>
+    <script src="../static/js/min.js"></script>
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/js/highlight.pack.js"></script>
+
+    <link href="../static/css/base.css" rel="stylesheet">
+    <link href="../static/css/styles/atelier-dune-light.css" rel="stylesheet">
+    <link href="../static/css/min.css" rel="stylesheet">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css">
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+</head>
+
+<body id="page-top" style="overflow-x: hidden;">
+    <header>
+        <div>
+            <nav class="navbar fixed-top navbar-expand-md  scrolling-navbar">
+
+                <div class="navbar-nav ml-auto" style="margin-right: 10rem;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-weight: 800;font-size: large;">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="animated--grow-in" style="margin-right: 2rem;">
+                            <a class="nav-link animated--grow-in" href="./index.html#About"><span><strong>About</strong></span></a>
+                        </div>
+                        <div class="animated--grow-in" style="margin-right: 2rem;">
+                            <a class="nav-link animated--grow-in " href="./index.html#Portfolio"><span><strong>Portfolio</strong></span></a>
+                        </div>
+                        <div class="animated--grow-in" style="margin-right: 2rem;">
+                            <a class="nav-link animated--grow-in " href="./blogs.html"><span><strong>Blogs</strong></span></a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="wrapper">
+        <div class="card" style="padding:10%;">
+            <h1> Scala notebook</h1>
+            <h2>Setting Up</h2>
+            <p>&nbsp;</p>
+            <h2>Scala DataTypes</h2>
+            <figure>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style='text-align:left;'>Data Types</th>
+                            <th style='text-align:left;'>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style='text-align:left;'>Byte</td>
+                            <td style='text-align:left;'>8-bit signed complement integer. The range is -128 to 127</td>
+                        </tr>
+                        <tr>
+                            <td style='text-align:left;'>Short</td>
+                            <td style='text-align:left;'>16-bit signed complement integer. The range is -32768 to 32767</td>
+                        </tr>
+                        <tr>
+                            <td style='text-align:left;'>Int</td>
+                            <td style='text-align:left;'>32-bit signed complement integer. The range is -2147483648 to 2147483647</td>
+                        </tr>
+                        <tr>
+                            <td style='text-align:left;'>Long</td>
+                            <td style='text-align:left;'>64-bit signed complement integer. The range is 127-9223372036854775808 to 9223372036854775807</td>
+                        </tr>
+                        <tr>
+                            <td style='text-align:left;'>Float</td>
+                            <td style='text-align:left;'>32-bit, IEEE 754 single-precision floating-point number</td>
+                        </tr>
+                        <tr>
+                            <td style='text-align:left;'>Double</td>
+                            <td style='text-align:left;'>64-bit, IEEE 754 single-precision floating-point number</td>
+                        </tr>
+                        <tr>
+                            <td style='text-align:left;'>Char</td>
+                            <td style='text-align:left;'>16-bit unsigned Unicode character, U+0000 to U+FFFF</td>
+                        </tr>
+                        <tr>
+                            <td style='text-align:left;'>String</td>
+                            <td style='text-align:left;'>String</td>
+                        </tr>
+                        <tr>
+                            <td style='text-align:left;'>Boolean</td>
+                            <td style='text-align:left;'>true or false</td>
+                        </tr>
+                        <tr>
+                            <td style='text-align:left;'>Unit</td>
+                            <td style='text-align:left;'>void</td>
+                        </tr>
+                        <tr>
+                            <td style='text-align:left;'>Null</td>
+                            <td style='text-align:left;'>null</td>
+                        </tr>
+                        <tr>
+                            <td style='text-align:left;'>Nothing</td>
+                            <td style='text-align:left;'>Subtype of anyother type</td>
+                        </tr>
+                        <tr>
+                            <td style='text-align:left;'>Any</td>
+                            <td style='text-align:left;'>supertype of anyother type</td>
+                        </tr>
+                        <tr>
+                            <td style='text-align:left;'>AnyRef</td>
+                            <td style='text-align:left;'>base type of any ref type</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </figure>
+            <h2>Scala Escape character</h2>
+            <figure>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style='text-align:left;'>Escape character</th>
+                            <th style='text-align:left;'>Unicode</th>
+                            <th style='text-align:left;'>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style='text-align:left;'>\b</td>
+                            <td style='text-align:left;'>\u0008</td>
+                            <td style='text-align:left;'>BS</td>
+                        </tr>
+                        <tr>
+                            <td style='text-align:left;'>\t</td>
+                            <td style='text-align:left;'>\u0009</td>
+                            <td style='text-align:left;'>HT</td>
+                        </tr>
+                        <tr>
+                            <td style='text-align:left;'>\n</td>
+                            <td style='text-align:left;'>\u000a</td>
+                            <td style='text-align:left;'>LF</td>
+                        </tr>
+                        <tr>
+                            <td style='text-align:left;'>\f</td>
+                            <td style='text-align:left;'>\u000cF</td>
+                            <td style='text-align:left;'>FF</td>
+                        </tr>
+                        <tr>
+                            <td style='text-align:left;'>\r</td>
+                            <td style='text-align:left;'>\u000d</td>
+                            <td style='text-align:left;'>CR</td>
+                        </tr>
+                        <tr>
+                            <td style='text-align:left;'>&quot;</td>
+                            <td style='text-align:left;'>\u0022</td>
+                            <td style='text-align:left;'>&quot;</td>
+                        </tr>
+                        <tr>
+                            <td style='text-align:left;'>&#39;</td>
+                            <td style='text-align:left;'>\u0027</td>
+                            <td style='text-align:left;'>&#39;&#39;</td>
+                        </tr>
+                        <tr>
+                            <td style='text-align:left;'>\</td>
+                            <td style='text-align:left;'>\u005c</td>
+                            <td style='text-align:left;'>\</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </figure>
+            <h2>Scala Reserved Symbols</h2>
+            <pre><code class='language-scala' lang='scala'>// Keywords
+&lt;-  // Used on for-comprehensions, to separate pattern from generator
+=&gt;  // Used for function types, function literals and import renaming
+
+// Reserved
+( )        // Delimit expressions and parameters
+[ ]        // Delimit type parameters
+{ }        // Delimit blocks
+.          // Method call and path separator
+// /* */   // Comments
+#          // Used in type notations
+:          // Type ascription or context bounds
+&lt;: &gt;:      // Upper and lower bounds
+&lt;%         // View bounds (deprecated)
+&quot; &quot;&quot;&quot;      // Strings
+&#39;          // Indicate symbols and characters
+@          // Annotations and variable binding on pattern matching
+`          // Denote constant or enable arbitrary identifiers
+,          // Parameter separator
+;          // Statement separator
+_*         // vararg expansion
+_          // Many different meanings
+</code></pre>
+            <h2>Scala Collections</h2>
+            <h3>Immutable Collections</h3>
+            <p><img src="../static/imgs/collections-immutable-diagram.svg" alt="collections-immutable-diagram" style="zoom:50%;" /></p>
+            <h3>Mutable Collections</h3>
+            <p><img src="../static/imgs/collections-mutable-diagram.svg" alt="collections-mutable-diagram" style="zoom:50%;" /></p>
+            <pre><code class='language-scala' lang='scala'>var x = 1 + 1
+x = 3 // This compiles because &quot;x&quot; is declared with the &quot;var&quot; keyword.
+println(x * x) // 9
+</code></pre>
+            <p>As with values, you can explicitly state the type if you want:</p>
+            <pre><code class='language-scala' lang='scala'>var x: Int = 1 + 1
+</code></pre>
+            <p>&nbsp;</p>
+            <h2>Scala Functional DataStructures</h2>
+            <h3>Sequence</h3>
+            <h4>List (Linear Sequence)</h4>
+            <pre><code class='language-scala' lang='scala'>val list = &quot;People&quot; :: &quot;love&quot; :: &quot;boys&quot; :: Nil”
+</code></pre>
+            <p>List operations:</p>
+            <pre><code class='language-scala' lang='scala'>::  // 1 :: List(2, 3)
+::: // List(1,2) ::: List(3)
+// List(1,2) ::: 3 :: List(4,5)
+</code></pre>
+            <p>&nbsp;</p>
+            <p>Array operations:</p>
+            <pre><code class='language-scala' lang='scala'>++  //arr + arr = Array(1, 2, 3, 1, 2, 3)
+++: //arr + arr = Array(1, 2, 3, 1, 2, 3)
++:  //arr + arr = Array(Array(1, 2, 3), 1, 2, 3)
+:+  //arr :+ 1 = Array(1, 2, 3, 1)
+</code></pre>
+            <h3>Maps (Hash, HashMaps, Dictionary)</h3>
+            <pre><code class='language-scala' lang='scala'>var map: Map[String,Int] = Map(&quot;Kaifeng&quot; -&gt; 21, &quot;Qinren&quot; -&gt; 20)
+var mapList = map map {kv =&gt; kv._1.startsWith(&quot;Q&quot;)}
+var updateMap = map map {
+  case (k,v) =&gt; (k, v+1)
+}
+</code></pre>
+            <h3>Traversing, Mapping, Filtering, Folding, Reducing</h3>
+            <pre><code class='language-scala' lang='scala'>def drop (n : Int) : TraversableLike.Repr
+/* Selects all elements except the first n elements. Returns a new traversable collection, which will be empty if this traversable collection has less than n elements. */
+def dropWhile (p : (A) =&gt; Boolean) : TraversableLike.Repr
+/* Drops the longest prefix of elements that satisfy a predicate. 
+Returns the longest suffix of this traversable collection whose first element does not satisfy the predicate p. */
+def exists (p : (A) =&gt; Boolean) : Boolean
+/*
+Tests whether a predicate holds for at least one of the elements of this traversable collection. Returns true if so or false, otherwise.*/
+def filter (p : (A) =&gt; Boolean) : TraversableLike.Repr
+/* Selects all elements of this traversable collection that satisfy a predicate. Returns a new traversable collection consisting of all elements of this traversable collection that satisfy the given predicate p. The order of the elements is preserved. */
+def filterNot (p : (A) =&gt; Boolean) : TraversableLike.Repr
+/* The “negation” of filter; selects all elements of this traversable collection that do not satisfy the predicate p… */
+def find (p : (A) =&gt; Boolean) : Option[A]
+/* Finds the first element of the traversable collection satisfying a predicate, if any. Returns an Option containing the first element in the traversable collection that satisfies p, or None if none exists. */
+def forall (p : (A) =&gt; Boolean) : Boolean
+/* Tests whether a predicate holds for all elements of this traversable collection. Returns true if the given predicate p holds for all elements, or false if it doesn’t.*/
+def partition (p : (A) =&gt; Boolean): (TraversableLike.Repr, TraversableLike.Repr)
+/*Partitions this traversable collection in two traversable collections according to a predicate. Returns a pair of traversable collections: the first traversable collection consists of all elements that satisfy the predicate p and the second traversable collection consists of all elements that don’t. The relative order of the elements in the resulting traversable collections is the same as in the original traversable collection. */
+def take (n : Int) : TraversableLike.Repr
+/* Selects the first n elements. Returns a traversable collection consisting only of the first n elements of this traversable collection, or else the whole traversable collection, if it has less than n elements.*/
+def takeWhile (p : (A) =&gt; Boolean) : TraversableLike.Repr
+/* Takes the longest prefix of elements that satisfy a predicate. Returns the longest prefix of this traversable collection whose elements all satisfy the predicate p. */ 
+</code></pre>
+            <pre><code class='language-scala' lang='scala'>(List(1, 2, 3, 4, 5, 6) foldRight List.empty[String]) {
+	(x, list) =&gt; (&quot;[&quot; + x + &quot;]&quot;) :: list
+}
+// List[String] = List(&quot;[1]&quot;, &quot;[2]&quot;, &quot;[3]&quot;, &quot;[4]&quot;, &quot;[5]&quot;, &quot;[6]&quot;)
+</code></pre>
+            <h3>Stream</h3>
+            <p>Fibonacci Example:</p>
+            <pre><code class='language-scala' lang='scala'>import scala.math.BigInt
+lazy val fibs: Stream[BigInt] = {
+  BigInt(0) #:: BigInt(1) #:: fibs.zip(fibs.tail).map(n =&gt; n._1 + n._2)
+}
+fibs take 10 foreach println
+</code></pre>
+            <p>&nbsp;</p>
+            <h2>Scala Syntactic Sugar</h2>
+            <ul>
+                <li>
+                    <p><code class="scala">a b</code> is equivalent to <code class="scala">a.b</code>.</p>
+                </li>
+                <li>
+                    <p><code class="scala">a b c</code> is equivalent to <code class="scala">a.b(c)</code>, except when <code class="scala">b</code> ends in <code class="scala">:</code>. In that case, <code class="scala">a b c</code> is equivalent to
+                        <code class="scala">c.b(a)</code>.</p>
+                </li>
+                <li>
+                    <p><code class="scala">a(b)</code> is equivalent to <code class="scala">a.apply(b)</code> This is why the following definitions for an anonymous functions are identical:</p>
+                    <pre><code class='language-scala' lang='scala'>val square1 = (x: Int) =&gt; x*x
+val square2 = new Function1[Int,Int] {
+    def apply(x: Int) = x*x
+}
+</code></pre>
+                    <p>When calling <code class="scala">square1(y)</code>, you are actually calling <code class="scala">square1.apply(y)</code> which <code class="scala">square1</code> must have as specified by the <code class="scala">Function1</code> trait
+                        (or <code class="scala">Function2</code>, etc...)</p>
+                </li>
+                <li>
+                    <p><code class="scala">a(b) = c</code> is equivalent to <code class="scala">a.update(b,c)</code>. Likewise, <code class="scala">a(b,c) = d</code> is equivalent to <code class="scala">a.update(b,c,d)</code> and so on.</p>
+                </li>
+                <li>
+                    <p><code class="scala">a.b = c</code> is equivalent to <code class="scala">a.b_=(c)</code>. When you create a <code class="scala">val</code>/<code class="scala">var</code> <code class="scala">x</code> in a Class/Object, Scala creates
+                        the methods <code class="scala">x</code> and <code class="scala">x_=</code> for you. You can define these yourself, but if you define <code class="scala">y_=</code> you <strong>must</strong> define <code class="scala">y</code>                        or it will not compile, for example:</p>
+                    <pre><code class='language-scala' lang='scala'>scala&gt; val b = new Object{ def set_=(a: Int) = println(a) }
+b: java.lang.Object{def set_=(Int): Unit} = $anon$1@17e4cec
+
+b.set = 5
+/*
+* &lt;console&gt;:6: error: value set is not a member of java.lang.Object{def set_=(Int): Unit}
+       b.set = 5
+         ^
+*/
+
+val c = new Object{ def set = 0 ; def set_=(a:Int) = println(a) }
+c: java.lang.Object{def set: Int; def set_=(Int): Unit} = $anon$1@95a253
+
+scala&gt; c.set = 5
+5
+</code></pre>
+                </li>
+                <li>
+                    <p><code class="scala">-a</code> corresponds to <code class="scala">a.unary_-</code>. Likewise for <code class="scala">+a</code>,<code class="scala">~a</code>, and <code class="scala">!a</code>.</p>
+                </li>
+                <li>
+                    <p><code class="scala">a &lt;operator&gt;= b</code>, where <code class="scala">&lt;operator&gt;</code> is some set of special characters, is equivalent to <code class="scala">a = a &lt;operator&gt; b</code> <strong>only</strong> if
+                        <code class="scala">a</code> doesn&#39;t have the <code class="scala">&lt;operator&gt;=</code> method, for example:</p>
+                </li>
+
+            </ul>
+            <h2>Scala Control Structure</h2>
+            <h3>Designing Control Structure</h3>
+            <p>One can design their own control structure like this:</p>
+            <pre><code class='language-scala' lang='scala'>def ~~(condition1: Boolean)(condition2: Boolean)(CodeBlock: Unit)= {
+   if (condition1 | condition2){
+      CodeBlock
+   }
+}
+~~(1&gt;2)(2&lt;1){
+   println(&quot;ok&quot;)
+}
+</code></pre>
+            <h2>Scala For Translation</h2>
+            <p>The syntax of for is closely related to the higher-order functions <code class="scala">map</code>,<code class="scala">flatMap</code>, and <code class="scala">filter</code></p>
+            <pre><code class='language-scala' lang='scala'>def mapFun[T,U](xs:List[T],f:T=&gt;U):List[U]=
+	for (x&lt;-xs) yield f(x)
+
+def flatMap[T,U](xs:List[T], f:T=&gt;Iterable[U]):List[U] = 
+	for (x &lt;- xs, y &lt;- f(x)) yield y
+
+def filte[T](xs:List[T],p: T=&gt;Boolean):List[T] = 
+	for (x&lt;-xs if p(x)) yield x
+</code></pre>
+            <h2>Scala Monoids</h2>
+            <h3>Monad Laws: Left Unit Law, Right Unit Law, Associative Law</h3>
+            <p><code class="scala">flatMap</code> for <code class="scala">Option</code></p>
+            <pre><code class='language-scala' lang='scala'>abstract class Option[+T] {
+  def flatMap[U](f: T =&gt; Option[U]):Option[U] = this match {
+    case Some(x) =&gt; f(x)
+    case None =&gt; None
+  }
+}
+</code></pre>
+            <p>need to show <strong>1)</strong><code class="scala">Some(x) flatMap f == f(x)</code><strong>3)</strong> <code class="scala">opt flatMap f flatMap g == opt flatMap (x ⇒ f(x) flatMap g)</code></p>
+            <h3>Try</h3>
+            <pre><code class='language-scala' lang='scala'>abstract class Try[+T]
+case class Success[T](x: T) extends Try[T]
+case class Failure(sx:Exception) extends Try[Nothing]
+</code></pre>
+            <p>&nbsp;</p>
+            <h2>Scala Method/Function</h2>
+            <pre><code class='language-scala' lang='scala'>val f = (x: Integer) =&gt; x+1 #This is a function
+def m(x:Integer):Integer={
+   x+1
+}
+</code></pre>
+            <p><strong>Difference between Method and Function</strong></p>
+            <ol start=''>
+                <li>A function can be passed into a method as an argument, but not a method.</li>
+                <li>A function must have an argument list, and a method can have no argument list.</li>
+
+            </ol>
+            <h2>Scala Partial Functions</h2>
+            <p>Partial functions are partial in the sense that they aren’t defined for all possible inputs, only those inputs that match at least one of the specified case clauses. Only case clauses can be specified in a partial function and the entire function
+                must be enclosed in curly braces. In contrast, “regular” function literals can be wrapped in parentheses or curly braces. If the function is called with an input that doesn’t match one of the case clauses, a MatchError is thrown at runtime.
+                You can test if a PartialFunction will match an input using the isDefinedAt method. This function avoids the risk of throwing a MathError exception. You can “chain” PartialFunctions together: <code class="scala">pf1 orElse pf2 orElse pf3</code>                …. If pf1 doesn’t match, then pf2 is tried, then pf3, etc. A MathError is only thrown if none of them matches. The following example illustrates these points:</p>
+            <pre><code class='language-scala' lang='scala'>val pf1: PartialFunction[Any,String] = { case s:String =&gt; &quot;YES&quot; }
+val pf2: PartialFunction[Any,String] = { case d:Double =&gt; &quot;YES&quot; }
+
+val pf = pf1 orElse pf2
+
+def tryPF(x: Any, f: PartialFunction[Any,String]): String =
+  try { f(x).toString } catch { case _: MatchError =&gt; &quot;ERROR!&quot; }
+
+def d(x: Any, f: PartialFunction[Any,String]) =
+  f.isDefinedAt(x).toString”
+</code></pre>
+            <h2>Scala Call by value v.s. Call by name</h2>
+            <p>Scala Call by name argument is also refered to a lazy argument because scala do not calculate the result until using it:</p>
+            <pre><code class='language-scala' lang='scala'>def first(a: Int, b: Int): Int = {
+   a
+}
+def first1(a: Int, b: =&gt;Int): Int = {
+   a
+}
+first(3 + 4, 5 + 6) // will be reduced to first(7, 5 + 6), then first(7, 11), and then 7
+first1(3 + 4, 5 + 6) // will be reduced to first(7, 5 + 6), then 7
+</code></pre>
+            <p>For another clearer example:</p>
+            <pre><code class='language-scala' lang='scala'>def a(x: Int){
+   println(x)
+   println(x)
+   println(x)
+}
+def b(x: =&gt;Int){
+   println(x)
+   println(x)
+   println(x)
+}
+var x: Int = 1
+a{x+=1;x} // print 1 1 1
+b{x+=1;x} // print 2 3 4
+</code></pre>
+            <h2>Scala Currying</h2>
+            <p><strong>Obvious syntax</strong></p>
+            <pre><code class='language-scala' lang='scala'>val zscore =  (mean: R, sd: R) =&gt; (x: R) =&gt;  (x - mean) / sd
+def zscore(mean: R, sd: R) = (x: R) =&gt; (x - mean) / sd
+</code></pre>
+            <p><strong>Sugar</strong></p>
+            <pre><code class='language-scala' lang='scala'>def zscore(mean: R, sd: R)(x: R) = (x - mean) / sd
+</code></pre>
+            <h2>Scala classes and traits</h2>
+            <h3>Private Members and Getter/Setter Syntax</h3>
+            <pre><code class='language-scala' lang='scala'>class Point {
+  private var _x = 0
+  private var _y = 0
+  private val bound = 100
+
+  def x = _x
+  def x_= (newValue: Int): Unit = {
+    if (newValue &lt; bound) _x = newValue else printWarning
+  }
+
+  def y = _y
+  def y_= (newValue: Int): Unit = {
+    if (newValue &lt; bound) _y = newValue else printWarning
+  }
+
+  private def printWarning = println(&quot;WARNING: Out of bounds&quot;)
+}
+
+val point1 = new Point
+point1.x = 99
+point1.y = 101 // prints the warning
+</code></pre>
+            <h3>Using traits</h3>
+            <p>Traits are used to share interfaces and fields between classes. They are similar to Java 8’s interfaces. Classes and objects can extend traits but traits cannot be instantiated and therefore have no parameters.</p>
+            <pre><code class='language-scala' lang='scala'>trait Iterator[A] {
+  def hasNext: Boolean
+  def next(): A
+}
+
+class IntIterator(to: Int) extends Iterator[Int] {
+  private var current = 0
+  override def hasNext: Boolean = current &lt; to
+  override def next(): Int = {
+    if (hasNext) {
+      val t = current
+      current += 1
+      t
+    } else 0
+  }
+}
+
+
+val iterator = new IntIterator(10)
+iterator.next()  // returns 0
+iterator.next()  // returns 1
+</code></pre>
+            <h3>Singleton object</h3>
+            <p>An object is a class that has exactly one instance. It is created lazily when it is referenced, like a lazy val.</p>
+            <p>As a top-level value, an object is a singleton.</p>
+            <p>As a member of an enclosing class or as a local value, it behaves exactly like a lazy val.</p>
+            <pre><code class='language-scala' lang='scala'>package logging
+
+object Logger {
+  def info(message: String): Unit = println(s&quot;INFO: $message&quot;)
+}
+</code></pre>
+            <pre><code class='language-scala' lang='scala'>import logging.Logger.info
+
+class Project(name: String, daysToComplete: Int)
+
+class Test {
+  val project1 = new Project(&quot;TPS Reports&quot;, 1)
+  val project2 = new Project(&quot;Website redesign&quot;, 5)
+  info(&quot;Created projects&quot;)  // Prints &quot;INFO: Created projects&quot;
+}
+</code></pre>
+            <h3>Companion object</h3>
+            <p>An object with the same name as a class is called a <em>companion object</em>. Conversely, the class is the object’s companion class. A companion class or object can access the private members of its companion. Use a companion object for methods
+                and values which are not specific to instances of the companion class.</p>
+            <pre><code class='language-scala' lang='scala'>import scala.math._
+
+case class Circle(radius: Double) {
+  import Circle._
+  def area: Double = calculateArea(radius)
+}
+
+object Circle {
+  private def calculateArea(radius: Double): Double = Pi * pow(radius, 2.0)
+}
+
+val circle1 = Circle(5.0)
+
+circle1.area
+</code></pre>
+            <h3>Generic class</h3>
+            <pre><code class='language-scala' lang='scala'>class Stack[A] {
+  private var elements: List[A] = Nil
+  def push(x: A) { elements = x :: elements }
+  def peek: A = elements.head
+  def pop(): A = {
+    val currentTop = peek
+    elements = elements.tail
+    currentTop
+  }
+}
+</code></pre>
+            <h3>Case Classes</h3>
+            <p>Case classes are like regular classes with a few key differences which we will go over. Case classes are good for modeling immutable data. </p>
+            <p>A minimal case class requires the keywords <code class="scala">case class</code>, an identifier, and a parameter list (which may be empty):</p>
+            <pre><code class="scala">case class Book(isbn: String)
+val frankenstein = Book(&quot;978-0486282114&quot;)
+</code></pre>
+            <p>Case classes are especially useful for pattern matching.</p>
+            <pre><code class='language-scala' lang='scala'>abstract class Notification
+
+case class Email(sender: String, title: String, body: String) extends Notification
+
+case class SMS(caller: String, message: String) extends Notification
+
+case class VoiceRecording(contactName: String, link: String) extends Notification
+
+</code></pre>
+            <p><code class="scala">Notification</code> is an abstract super class which has three concrete Notification types implemented with case classes <code class="scala">Email</code>, <code class="scala">SMS</code>, and <code class="scala">VoiceRecording</code>.
+                Now we can do pattern matching on these case classes.
+            </p>
+            <h3>Combining the above three structure</h3>
+            <pre><code class='language-scala' lang='scala'>trait Animal
+case class Dog(name: String) extends Animal 
+case class Cat(name: String) extends Animal 
+case object Woodpecker extends Animal
+object CaseClassTest extends App {
+   def determineType(x: Animal): String = x match {
+      case Dog(moniker) =&gt; &quot;Got a Dog, name = &quot; + moniker 
+      case _:Cat =&gt; &quot;Got a Cat (ignoring the name)&quot;
+      case Woodpecker =&gt; &quot;That was a Woodpecker&quot;
+      case _ =&gt; &quot;That was something else&quot;
+	}
+   println(determineType(new Cat(&quot;Sanhua&quot;)))
+   println(determineType(new Dog(&quot;Wangcai&quot;)))
+}
+</code></pre>
+            <h3>Variances</h3>
+            <p>Say <code class="scala">C[T]</code> us a paramterized type and <code class="scala">A,B</code> are types such that <code class="scala">A &lt;: B</code>.</p>
+            <p>In general there are three possible relationships between <code class="scala">c[A]</code> and <code class="scala">C[B]</code>: </p>
+            <p><code class="scala">C[A] &lt;: C[B]</code> C is covariant</p>
+            <p><code class="scala">C[A] &gt;: C[B]</code> C is contravariant</p>
+            <p><code class="scala">C[A] ? C[B]</code> C is nonvariant</p>
+            <pre><code class='language-scala' lang='scala'>class Foo[+A] // A covariant class
+class Bar[-A] // A contravariant class
+class Baz[A]  // An invariant class
+</code></pre>
+            <h4>Covariance</h4>
+            <p>A type parameter <code class="scala">A</code> of a generic class can be made covariant by using the annotation <code class="scala">+A</code>. For some <code class="scala">class List[+A]</code>, making <code class="scala">A</code> covariant
+                implies that for two types <code class="scala">A</code> and <code class="scala">B</code> where
+                <code class="scala">A</code> is a subtype of <code class="scala">B</code>, then <code class="scala">List[A]</code> is a subtype of <code class="scala">List[B]</code>. This allows us to make very useful and intuitive subtyping relationships
+                using generics.</p>
+            <h4>Contravariance</h4>
+            <p>A type parameter <code class="scala">A</code> of a generic class can be made contravariant by using the annotation <code class="scala">-A</code>. This creates a subtyping relationship between the class and its type parameter that is similar,
+                but opposite to what we get with covariance. That is, for some <code class="scala">class Writer[-A]</code>, making <code class="scala">A</code> contravariant implies that for two types <code class="scala">A</code> and <code class="scala">B</code>                where <code class="scala">A</code> is a subtype of <code class="scala">B</code>, <code class="scala">Writer[B]</code> is a subtype of <code class="scala">Writer[A]</code>.</p>
+            <h3>Upper and Lower type bound</h3>
+            <p>In Scala, <a href='https://docs.scala-lang.org/tour/generic-classes.html'>type parameters</a> and <a href='https://docs.scala-lang.org/tour/abstract-type-members.html'>abstract type members</a> may be constrained by a type bound. Such type
+                bounds limit the concrete values of the type variables and possibly reveal more information about the members of such types. An <em>upper type bound</em> <code class="scala">T &lt;: A</code> declares that type variable <code class="scala">T</code>                refers to a subtype of type
+                <code class="scala">A</code>. Here is an example that demonstrates upper type bound for a type parameter of class <code class="scala">PetContainer</code>:</p>
+            <pre><code class='language-scala' lang='scala'>abstract class Animal {
+ def name: String
+}
+
+abstract class Pet extends Animal {}
+
+class Cat extends Pet {
+  override def name: String = &quot;Cat&quot;
+}
+
+class Dog extends Pet {
+  override def name: String = &quot;Dog&quot;
+}
+
+class Lion extends Animal {
+  override def name: String = &quot;Lion&quot;
+}
+
+class PetContainer[P &lt;: Pet](p: P) {
+  def pet: P = p
+}
+
+val dogContainer = new PetContainer[Dog](new Dog)
+val catContainer = new PetContainer[Cat](new Cat)
+</code></pre>
+            <p>While <a href='https://docs.scala-lang.org/tour/upper-type-bounds.html'>upper type bounds</a> limit a type to a subtype of another type, <em>lower type bounds</em> declare a type to be a supertype of another type. The term <code class="scala">B &gt;: A</code>                expresses that the type parameter <code class="scala">B</code> or the abstract type <code class="scala">B</code> refer to a supertype of type <code class="scala">A</code>. In most cases, <code class="scala">A</code> will be the type parameter
+                of the class and <code class="scala">B</code> will be the type parameter of a method.</p>
+            <pre><code class='language-scala' lang='scala'>trait Node[+B] {
+  def prepend(elem: B): Node[B]
+}
+
+case class ListNode[+B](h: B, t: Node[B]) extends Node[B] {
+  def prepend(elem: B): ListNode[B] = ListNode(elem, this)
+  def head: B = h
+  def tail: Node[B] = t
+}
+
+case class Nil[+B]() extends Node[B] {
+  def prepend(elem: B): ListNode[B] = ListNode(elem, this)
+}
+</code></pre>
+            <p>Here is an example from <a href='https://www.coursera.org/learn/progfun1/home/welcome'>Functional Programming Principles in Scala</a></p>
+            <pre><code class='language-scala' lang='scala'>trait Foo[+T] {
+  def prepend(x: T):List[T] = List(x) //wrong covariant type T occurs in contravariant position in type T of value x
+  def prepend[U &gt;: T](elem: U):List[U] = List(elem) //correct prepend(x:B) =&gt; List[A]
+}
+
+trait D[-T,+U] { // T2 &lt;: T1, U1 &lt;: U2, then T1 =&gt; U1 &lt;: T2 =&gt; U2
+  def f(x:T):U
+  } 
+</code></pre>
+            <p>&nbsp;</p>
+            <h3>Self-type</h3>
+            <p>Self-types are a way to declare that a trait must be mixed into another trait, even though it doesn’t directly extend it. That makes the members of the dependency available without imports.</p>
+            <p>A self-type is a way to narrow the type of <code class="scala">this</code> or another identifier that aliases <code class="scala">this</code>. The syntax looks like normal function syntax but means something entirely different.</p>
+            <p>To use a self-type in a trait, write an identifier, the type of another trait to mix in, and a <code class="scala">=&gt;</code> (e.g. <code class="scala">someIdentifier: SomeOtherTrait =&gt;</code>)</p>
+            <pre><code class='language-scala' lang='scala'>trait People {
+  def name: String
+}
+
+trait Boy {
+  this: People =&gt;  // reassign this
+  def say(Text: String) = println(s&quot;$name says $Text&quot;)
+}
+
+class MyBoy(val name_ : String) extends People with Boy {  // We mixin User because Tweeter required it
+	def name = s&quot;real $name_&quot;
+}
+
+val Qinren = new MyBoy(&quot;Qinren&quot;)
+Qinren.say(&quot;I love you&quot;)  // prints &quot;Qinren says I love you&quot;
+</code></pre>
+            <h3>Without Using the new Keyword</h3>
+            <p>There are two ways to do this:</p>
+            <ul>
+                <li>
+                    <p>Create a companion object for your class, and define an apply method in the companion object with the desired constructor signature.</p>
+                    <pre><code class='language-scala' lang='scala'>class Person {
+	var name: String = _
+}
+object Person {
+	def apply(name: String): Person = {
+		var p = new Person
+      p.name = name
+		p
+	}
+}
+//To create multiple constructors when manually defining your own apply method, just define multiple apply methods in the companion object that provide the constructor signatures you want:
+class Person { var name = &quot;&quot;; var age = 0}
+object Person {
+def apply(name: String): Person = { 
+   var p = new Person
+	p.name = name
+	p
+	}
+def apply(name:String, age:Int): Person = {
+   var p = new Person
+   p.name = name; p.age = age
+   p
+	}
+}
+</code></pre>
+                    <p>The <code class="scala">apply</code> method also has another role in matching argument when creating new instance. For example:</p>
+                    <pre><code class='language-scala' lang='scala'>class Person{def speak:Unit={}}
+object Person{
+   private class Boy extends Person{
+      override def speak: Unit = { println(&quot;I love boys&quot;) }
+   }
+   private class Girl extends Person{
+      override def speak: Unit = { println(&quot;I love boys too&quot;)}
+   }
+   def apply(s:String): Person = s match {
+      case &quot;myBoy&quot; =&gt; new Boy
+      case &quot;Mygirl&quot; =&gt; new Girl
+      case _ =&gt; new Person
+   }
+}
+var kf = Person(&quot;myBoy&quot;)
+</code></pre>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                </li>
+                <li>
+                    <p>Define your class as a <strong><em>case class</em></strong>.</p>
+                    <pre><code class='language-scala' lang='scala'>case class Person (var name: String)
+val p = Person(&quot;Shang Kaifeng&quot;)
+</code></pre>
+                    <p>&nbsp;</p>
+                </li>
+
+            </ul>
+            <h2>Scala Implicit</h2>
+            <h3>Implicit parameters</h3>
+            <p>A method can have an <em>implicit</em> parameter list, marked by the <em>implicit</em> keyword at the start of the parameter list. If the parameters in that parameter list are not passed as usual, Scala will look if it can get an implicit
+                value of the correct type, and if it can, pass it automatically.</p>
+            <p>The places Scala will look for these parameters fall into two categories:</p>
+            <ul>
+                <li>
+                    <p>Where does the compiler look for <em>candidate definitions</em> when it tries to infer an implicit parameter of type T?</p>
+                    <p>The compiler searches for definitions that:</p>
+                    <ul>
+                        <li>have type T,</li>
+                        <li>are marked implicit,</li>
+                        <li>are visible at the point of the function call, or are defined in a companion object <em>associated</em> with T.</li>
+
+                    </ul>
+                    <p>If there is a single (most specific) definition, it will be taken as the actual argument for the implicit parameter. Otherwise an error is reported.</p>
+                </li>
+
+            </ul>
+            <pre><code class='language-scala' lang='scala'>abstract class Monoid[A] {
+  def add(x: A, y: A): A
+  def unit: A
+}
+
+object ImplicitTest {
+  implicit val stringMonoid: Monoid[String] = new Monoid[String] {
+    def add(x: String, y: String): String = x concat y
+    def unit: String = &quot;&quot;
+  }
+  
+  implicit val intMonoid: Monoid[Int] = new Monoid[Int] {
+    def add(x: Int, y: Int): Int = x + y
+    def unit: Int = 0
+  }
+  
+  def sum[A](xs: List[A])(implicit m: Monoid[A]): A =
+    if (xs.isEmpty) m.unit
+    else m.add(xs.head, sum(xs.tail))
+    
+  def main(args: Array[String]): Unit = {
+    println(sum(List(1, 2, 3)))       // uses intMonoid implicitly
+    println(sum(List(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;))) // uses stringMonoid implicitly
+  }
+}
+</code></pre>
+            <h3>Implicit Search Scope</h3>
+            <p>The search for an implicit value of type T first looks at all the implicit definitions that are <em>visible</em> (inherited, imported, or defined in an enclosing scope).</p>
+            <p>If the compiler does not find an implicit instance matching the queried type T in the lexical scope, it continues searching in the <em>companion</em> objects <em>associated</em> with T. There are two concepts to explain here: companion objects
+                and types associated with other types.</p>
+            <p>A <em>companion</em> object is an object that has the same name as a type. For instance, the object scala.math.Ordering is the companion of the type scala.math.Ordering.</p>
+            <p>The types <em>associated</em> with a type T are:</p>
+            <ul>
+                <li>if T has parent types T₁ with T₂ ... with Tₙ, the union of the parts of T₁, ... Tₙ as well as T itself,</li>
+                <li>if T is a parameterized type S[T₁, T₂, ..., Tₙ], the union of the parts of S and T₁, ..., Tₙ,</li>
+                <li>otherwise, just T itself.</li>
+
+            </ul>
+            <p>As an example, consider the following type hierarchy:</p>
+            <pre><code class='language-scala' lang='scala'>trait Foo[A]
+trait Bar[A] extends Foo[A]
+trait Baz[A] extends Bar[A]
+trait X
+trait Y extends X 
+</code></pre>
+            <p>If an implicit value of type Bar[Y] is required, the compiler will look for implicit definitions in the following companion objects:</p>
+            <ul>
+                <li>Bar, because it is a part of Bar[Y],</li>
+                <li>Y, because it is a part of Bar[Y],</li>
+                <li>Foo, because it is a parent type of Bar,</li>
+                <li>and X, because it is a parent type of Y.</li>
+
+            </ul>
+            <p>However, the Baz companion object will not be visited.</p>
+            <h3>Implicit Conversions</h3>
+            <p><strong>Implicit conversions</strong> in Scala are the set of methods that are apply when an object of wrong type is used. It allows the compiler to automatically convert of one type to another.</p>
+            <p>An implicit conversion from type <code class="scala">S</code> to type <code class="scala">T</code> is defined by an implicit value which has function type <code class="scala">S =&gt; T</code>, or by an implicit method convertible to a value
+                of that type.</p>
+            <p>Implicit conversions are applied in two situations:</p>
+            <ul>
+                <li>If an expression <code class="scala">e</code> is of type <code class="scala">S</code>, and <code class="scala">S</code> does not conform to the expression’s expected type <code class="scala">T</code>.</li>
+                <li>In a selection <code class="scala">e.m</code> with <code class="scala">e</code> of type <code class="scala">S</code>, if the selector <code class="scala">m</code> does not denote a member of <code class="scala">S</code>.</li>
+                <li>Un an application <code class="scala">e.m(args)</code> with <code class="scala">e</code> of type <code class="scala">T</code>, if <code class="scala">T</code> does define some member(s) named <code class="scala">m</code>, but none of these
+                    members can be applied to the arguments <code class="scala">args</code>.</li>
+
+            </ul>
+            <p><strong>Example1:</strong></p>
+            <p>We can convert Int to String.</p>
+            <pre><code class='language-scala' lang='scala'>import scala.language.implicitConversions
+
+implicit def conv1(x: Int): String = x.toString
+implicit def conv2(x: =&gt; Int): String = x.toString
+
+val x: String = 0 // Compiles in Scala2 (uses `conv1`)
+</code></pre>
+            <p><strong>Example2:</strong> ❓</p>
+            <p>An implicit method <code class="scala">Int =&gt; Ordered[Int]</code> is provided automatically through <code class="scala">scala.Predef.intWrapper</code>. An example of an implicit method <code class="scala">List[A] =&gt; Ordered[List[A]]</code>                is provided below.</p>
+            <p>More generally, a method definition such as:</p>
+            <pre><code class='language-scala' lang='scala'>def f[A: U₁ ... : Uₙ](ps): R = ...
+</code></pre>
+            <p>expands to </p>
+            <pre><code class='language-scala' lang='scala'>def f[A](ps)(implicit ev₁: U₁[A], ..., evₙ: Uₙ[A]): R = ...
+</code></pre>
+            <p>e.g.</p>
+            <pre><code class='language-scala' lang='scala'>import scala.language.implicitConversions
+
+implicit def list2ordered[A](x: List[A])
+    (implicit elem2ordered: A =&gt; Ordered[A]): Ordered[List[A]] =
+  new Ordered[List[A]] { 
+    //replace with a more useful implementation
+    def compare(that: List[A]): Int = 1
+  }
+</code></pre>
+            <p><strong>Sorting a list of list of numbers:</strong></p>
+            <pre><code class='language-scala' lang='scala'>implicit def orderingList[A](implicit ord: Ordering[A]): Ordering[List[A]] =
+  new Ordering[List[A]] {
+    def compare(xs0: List[A], ys0: List[A]) = {
+      def loop(xs: List[A], ys: List[A]): Int = (xs, ys) match {
+        case (x :: xsTail, y :: ysTail) =&gt;
+          val c = ord.compare(x, y)
+          if (c != 0) c else loop(xsTail, ysTail)
+        case (Nil, Nil) =&gt; 0
+        case (_, Nil)   =&gt; 1
+        case (Nil, _)   =&gt; -1
+      }
+      loop(xs0, ys0)
+    }
+  } 
+</code></pre>
+            <p>✨<strong>Sort a pair of data:</strong></p>
+            <pre><code class='language-scala' lang='scala'>implicit def orderingPair[A, B](implicit
+  orderingA: Ordering[A],
+  orderingB: Ordering[B]
+): Ordering[(A, B)] =
+  new Ordering[(A, B)] {
+    def compare(pair1: (A, B), pair2: (A, B)): Int = {
+      val firstCriteria = orderingA.compare(pair1._1, pair2._1)
+      if (firstCriteria != 0) firstCriteria
+      else orderingB.compare(pair1._2, pair2._2)
+    }
+  }
+sort(movies)(movie =&gt; (movie.rating, movie.duration))(
+  orderingPair(Ordering.Int, Ordering.Int)
+)
+</code></pre>
+            <p>Note that in the standard library the sort function that we have defined here is already available as a method sortBy on collections.</p>
+            <p><strong>Example3:</strong></p>
+            <p>This example enable adding method to an existing type String. (a more direct syntax in Dotty (scala3) have solution ot the same problem)</p>
+            <pre><code class='language-scala' lang='scala'>class StringImprovements(val s: String) { 
+   def increment = s.map(c =&gt; (c + 1).toChar)
+}
+implicit def stringToString(s: String) = new StringImprovements(s)
+val name2 = &quot;rg`mfj`hedmf&quot;.increment
+</code></pre>
+            <p>In dotr:</p>
+            <pre><code class='language-scala' lang='scala'>def (s:String).increment = s.map(c =&gt; (c + 1).toChar)
+&quot;rg`mfj`hedmf&quot;.increment
+</code></pre>
+            <h3>Implicitly</h3>
+            <p>Predef defines a method called implicityly. Combined with a type signature addition, it provides a useful shorthand way of defining method signatures that take a single implicit argument, where that argument is parameterized type.</p>
+            <p><strong>Example4:</strong></p>
+            <pre><code class='language-scala' lang='scala'>import math.Ordering
+
+case class MyList[A](list:List[A]){
+  def sortBy1[B](f: A =&gt; B)(implicit ord: Ordering[B]):List[A] = list.sortBy(f)(ord)
+  def sortBy2[B : Ordering](f: A =&gt; B):List[A] = list.sortBy(f)(implicitly[Ordering[B]])
+}
+val testLst: MyList[Int] = MyList(List(1,8,7,4,5,9,6,3,2,0))
+testLst.sortBy(_)
+</code></pre>
+            <h3>Implicit Evidence</h3>
+            <p>We need to constrain the allowed types and not provide additional processing capability. That is, we need &quot;evidence&quot; that provide additional processing capability.</p>
+            <pre><code class='language-scala' lang='scala'>trait TraversableOnce[+A]{
+  def toMap[T,U](implicit evidence: &lt;:&lt;[A,(T,U)]): immutable.Map[T,U])
+}
+</code></pre>
+            <p>It uses a type defined in Predef called &lt;:&lt;, named to resemble the type parameter constraint &lt;:, e.g., A &lt;: B.</p>
+            <h3>Type Class Pattern</h3>
+            <p>Type classes help us avoid the temptation of creating &quot;kitchen-sink&quot; abstractions, like Java&#39;s Object, because we can add behavior on an ad hoc basis. We try not to modifying the types but using the implicit mechanism to wrap
+                objects with types that provide the behaviors we need.</p>
+            <h2>Scala Functional Programming</h2>
+            <h3>Functional Data Structure</h3>
+            <pre><code class='language-scala' lang='scala'>type Set = Int =&gt; Boolean // type &quot;Set&quot; as a function
+def contains(s:Set,i:Int):Boolean = s(i)
+def singleton(i:Int):Set = (f:Int) =&gt; f == i // returns a Set function
+def union(s1: Set, s2: Set):Set = x =&gt; s1(x) || s2(x)
+def intersct(s: FunSet, t: FunSet): FunSet = x =&gt; s(x) &amp;&amp; t(x) 
+def diff(s: FunSet, t: FunSet): FunSet = x =&gt; s(x) &amp;&amp; !t(x) 
+def filter(s: FunSet, p: Int =&gt; Boolean): FunSet = intersect(s,p) 
+def exists(s: FunSet, p: Int =&gt; Boolean): Boolean = !forall(s, x =&gt; p(x)) 
+def map(s: FunSet, f: Int =&gt; Int): FunSet = x =&gt; exists(s, y =&gt; f(y) == x) 
+</code></pre>
+            <p>Or alternatively, we make these functional data structure as objects:</p>
+            <pre><code class='language-scala' lang='scala'>abstract class IntSet { //or trait as interface
+    def filter(f:Int =&gt; Boolean):IntSet
+    def filterS(f:Int =&gt; Boolean, s:IntSet):IntSet
+    def union(that:IntSet):IntSet
+    def contains(x:Int):Boolean
+    def incl(x:Int):IntSet
+  } 
+class NonEmpty(elem:Int, left:IntSet, right:IntSet) extends IntSet {
+  def filter(f:Int =&gt; Boolean):IntSet = filterS(f, new Empty)
+  def filterS(f:Int =&gt; Boolean, s:IntSet):IntSet = {
+    if f(elem) left.filterS(f, right.filterS(f, s.incl(elem)))
+    else left.filterS(f, right.filterS(f, s))
+  }
+  def union(that:IntSet):IntSet = right.union(left.union(that.incl(elem)))
+  def contains(x:Int):Boolean =  
+    if (x &lt; elem) left contains x 
+    else if (x &gt; elem) right contains x 
+    else true 
+  def incl(x:Int):IntSet =  
+    if (x &lt; elem) new NonEmpty(elem, left incl x, right) 
+    else if (x &gt; elem) new NonEmpty(elem, left, right incl x) 
+    else this 
+} 
+class Empty extends IntSet {
+    def filter(f:Int =&gt; Boolean):IntSet = new Empty
+    def filterS(f:Int =&gt; Boolean, s:IntSet):IntSet = s
+    def union(that: IntSet):IntSet = that
+    def contains(x:Int):Boolean = false
+    def incl(x:Int):IntSet = new NonEmpty(x, new Empty, new Empty)
+  }
+</code></pre>
+            <p>This is actually a binary search tree like data structure. Note that Int can be replace by other comparable types.</p>
+            <h3>Extending Iterable</h3>
+            <p>We can customize datastructures with Iterable (Node that after scala 2.13 the <code class="scala">Traversable</code> interaface is de)</p>
+            <pre><code class='language-scala' lang='scala'>trait LinkedList[T] extends Iterable[T] {
+    val headValue:T
+  	val tailList
+}
+
+object Nil extends LinkedList[AnyVal] {
+    lazy val headValue = throw new IllegalAccessException(&quot;head of Nil&quot;)
+  	lazy val tailValue = throw new IllegalAccessException(&quot;tail of Nil&quot;)
+  	override def iterator:Iterator[AnyVal] = Iterator.empty
+}
+
+class Node[T](val headValue: T, val tailList: LinkedList[T]) extends LinkedList[T] {
+  
+    override def iterator: Iterator[T] = Iterator
+      .iterate(this: LinkedList[T])(_.tailList)
+      .takeWhile(_ != Nil)
+      .map(_.nodeValue)
+  } 
+</code></pre>
+            <p>&nbsp;</p>
+        </div>
+    </div>
+    <div class="footer-bg ">
+        <div class="footer text-center text-white " style="margin-right:10%;">
+            <!--First column-->
+
+
+            <!--Social buttons-->
+
+            <br>
+            <div class="footer">
+
+                <br>
+                <br>
+
+                <strong class="text-white "> 
+
+          Personal e-mail: <a href="mailto:xueziweisz@gmail.com " class="link-in-text-white ">  xueziweisz@gmail.com</a><br>
+          Instute e-mail: <a href="mailto:ziwei.17@intl.zju.edu.cn " class="link-in-text-white ">  ziwei.17@intl.zju.edu.cn</a>
+
+        </strong>
+                <br>
+                <br>
+                <div class=" list-unstyled list-inline ">
+
+                    <li class="list-inline-item "><a class="btn-floating btn-tw" href="https://twitter.com/xueziweisz "><i class="fab fa-twitter text-white "> </i></a></li>
+                    <li class="list-inline-item "><a class="btn-floating btn-gplus" href="mailto:xueziweisz@gmail.com "><i class="fab fa-google-plus-g text-white "> </i></a></li>
+                    <li class="list-inline-item "><a class="btn-floating btn-git" href="https://github.com/Beiusxzw "><i class="fab fa-github text-white "> </i></a></li>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="footer-copyright ">
+                Copyright © 2020 Snow |
+            </div>
+            <br>
+            <br>
+            <br>
+        </div>
+
+    </div>
+</body>
+
+</html>
