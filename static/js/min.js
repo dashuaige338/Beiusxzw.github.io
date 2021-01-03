@@ -3,14 +3,10 @@ $(document).ready(function() {
     function checkOffset() {
         if ($(".fixed-top").offset().top > 80) {
             $(".fixed-top").addClass("top-nav-collapse");
-            $(".fixed-top").addClass("blue");
-            $(".fixed-top").removeClass("navbar-light")
-            $(".fixed-top").addClass("navbar-dark");
+            $(".fixed-top").addClass("border-bottom");
         } else {
             $(".fixed-top").removeClass("top-nav-collapse");
-            $(".fixed-top").addClass("navbar-light");
-            $(".fixed-top").removeClass("blue");
-            $(".fixed-top").removeClass("navbar-dark");
+            $(".fixed-top").removeClass("border-bottom");
         }
     }
     checkOffset();
